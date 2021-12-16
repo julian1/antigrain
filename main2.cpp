@@ -90,6 +90,8 @@ int main()
     agg::renderer_base<agg::pixfmt_rgb24>   rb(pixf);
 
 
+     rb.clear(agg::rgba(1,0,0));     // green.
+
 #if 0
     agg::rgba8 span[frame_width];
 
