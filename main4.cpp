@@ -1,15 +1,10 @@
 /*
-   nix-shell -p gcc10
-  
-   g++ main.cpp -I agg-svn-r138-agg-2.4/include/
-  ./a.out
-  feh agg_test.ppm
-    
-  basic renderers
-    agg.sourceforge.net/antigrain.com/doc/basic_renderers/basic_renderers.agdoc.html
 
-    
-  agg_pixfmt_rgb565.h, 16 bits per pixel, 5 bits for Red, 6 bits for Green, and 5 bits for Blue
+  pixfmt_rgb24 defined like this
+
+    typedef pixfmt_alpha_blend_rgb<blender_rgb24, rendering_buffer, 3> pixfmt_rgb24;
+    in agg_pixfmt_rgb.h
+
 */
 
 
@@ -72,8 +67,13 @@ int main()
 
 
 
+
+
+    // typedef pixfmt_alpha_blend_rgb<blender_rgb24, rendering_buffer, 3> pixfmt_rgb24;
+    typedef agg::pixfmt_alpha_blend_rgb<agg::blender_rgb24, agg::rendering_buffer, 3> pixfmt_t;
+
     // typedef agg::pixfmt_rgb565 pixfmt_t;
-    typedef agg::pixfmt_rgb24  pixfmt_t;
+    // typedef agg::pixfmt_rgb24  pixfmt_t;
 
     pixfmt_t  pixf(rbuf);
 
