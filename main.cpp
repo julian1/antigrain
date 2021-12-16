@@ -2,6 +2,9 @@
    nix-shell -p gcc10
   
    g++ main.cpp -I agg-svn-r138-agg-2.4/include/
+  ./a.out
+  feh agg_test.ppm
+ 
     
   basic renderers
     agg.sourceforge.net/antigrain.com/doc/basic_renderers/basic_renderers.agdoc.html

@@ -1,14 +1,9 @@
 /*
-   nix-shell -p gcc10
-  
-   g++ main.cpp -I agg-svn-r138-agg-2.4/include/
-  ./a.out
-  feh agg_test.ppm
-    
-  basic renderers
-    agg.sourceforge.net/antigrain.com/doc/basic_renderers/basic_renderers.agdoc.html
+  uses rgb565 packing.
+  not clear if this works.
 
-    
+  need to try on actual tft. write_ppm/ feh probably expect
+
   agg_pixfmt_rgb565.h, 16 bits per pixel, 5 bits for Red, 6 bits for Green, and 5 bits for Blue
 */
 
@@ -37,12 +32,12 @@ enum
 };
 
 
-// Writing the buffer to a .PPM file, assuming it has 
+// Writing the buffer to a .PPM file, assuming it has
 // RGB-structure, one byte per color component
 //--------------------------------------------------
-bool write_ppm(const unsigned char* buf, 
-               unsigned width, 
-               unsigned height, 
+bool write_ppm(const unsigned char* buf,
+               unsigned width,
+               unsigned height,
                const char* file_name)
 {
     FILE* fd = fopen(file_name, "wb");
@@ -65,15 +60,15 @@ int main()
 
     memset(buffer, 255, frame_width * frame_height * 3);
 
-    agg::rendering_buffer rbuf(buffer, 
-                               frame_width, 
-                               frame_height, 
+    agg::rendering_buffer rbuf(buffer,
+                               frame_width,
+                               frame_height,
                                frame_width * 3);
 
 
 
-    // typedef agg::pixfmt_rgb565 pixfmt_t;
-    typedef agg::pixfmt_rgb24  pixfmt_t;
+    typedef agg::pixfmt_rgb565 pixfmt_t;
+    // typedef agg::pixfmt_rgb24  pixfmt_t;
 
     pixfmt_t  pixf(rbuf);
 
