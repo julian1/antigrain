@@ -214,6 +214,8 @@ using namespace agg;
             return false;
         }
 
+#if 0
+
         //--------------------------------------------------------------------
         Blender& blender() { return m_blender; }
 
@@ -721,6 +723,7 @@ using namespace agg;
             }
         }
 
+  #endif
     private:
         rbuf_type* m_rbuf;
         Blender    m_blender;
@@ -760,7 +763,7 @@ int main()
 
 
     // typedef pixfmt_alpha_blend_rgb<blender_rgb24, rendering_buffer, 3> pixfmt_rgb24;
-    typedef agg::pixfmt_alpha_blend_rgb<agg::blender_rgb24, agg::rendering_buffer, 3> pixfmt_t;
+    typedef ::pixfmt_alpha_blend_rgb<agg::blender_rgb24, agg::rendering_buffer, 3> pixfmt_t;
 
     // typedef agg::pixfmt_rgb565 pixfmt_t;
     // typedef agg::pixfmt_rgb24  pixfmt_t;
@@ -772,12 +775,6 @@ int main()
 
      rb.clear(agg::rgba(1,0,0));     // red.
 
-
-      unsigned i;
-    for(i = 0; i < pixf.height()/2; ++i)
-    {
-        pixf.copy_pixel(i, i, agg::rgba8(127, 200, 98));
-    }
 
 
     write_ppm(buffer, frame_width, frame_height, "agg_test.ppm");
