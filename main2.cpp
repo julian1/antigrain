@@ -16,6 +16,17 @@
 // #include "agg_pixfmt_rgb24.h"
 #include "agg_pixfmt_rgb.h"
 
+
+#include "agg_basics.h"
+// #include "agg_rendering_buffer.h"
+
+#include "agg_rendering_buffer.h"
+#include "agg_rasterizer_scanline_aa.h"
+
+#include "agg_scanline_p.h"
+#include "agg_renderer_scanline.h"
+
+
 enum
 {
     frame_width = 320,
@@ -70,6 +81,13 @@ int main()
 
 
 
+  
+    // typedef  renderer_base;
+
+    //typedef agg::pixfmt_rgb565 pixfmt;
+    // pixfmt pixf(rbuf);
+
+    agg::renderer_base<agg::pixfmt_rgb24>   rb(pixf);
 
 
 #if 0
