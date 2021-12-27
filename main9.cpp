@@ -104,7 +104,9 @@ void write_c_header( )
 
 void write_glyph_c_data( int code, serialized_path_type  &x )
 {
-  std::cout << "// "  " '" << char(code) << "' (" << code <<  ")"  << std::endl;
+  // std::cout << "// "  " '" << char(code) << "' (" << code <<  ")"  << std::endl;
+  std::cout << "// '" << (code == 10 || code == 13 || code == 92 ? 'x' : char(code)) << std::endl;
+
   std::cout << "static agg::int8u code_" << code << "[ " << ( x.m_end - x.m_data ) << "] = { ";
 
   for(const agg::int8u *i = x.m_data; i < x.m_end; ++i ) {
