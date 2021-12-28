@@ -2,10 +2,12 @@
     load and render freetype to span data.
     use type and length to wowk out the covers
 
-    Usage, 
-    ./build10.sh 
-    ./a.out fonts/arial.ttf  > out.cpp 
+    Usage,
+    ./build10.sh
+    ./a.out fonts/arial.ttf  > out.cpp
     g++ -c out.cpp  -I ./agg-svn-r138-agg-2.4/include/
+
+    scanlines for all glyphys is pretty large.
 
 */
 
@@ -105,8 +107,14 @@ public:
       // just use a flat static array strucutre
       // instead of all the addition handle in the called func
 
+      x -= 50;
+      y -= 50;
+
       // write the span type and span data
-      std::cout << (0x01 << 7) << ", " << x << ", " << y << ", " << len << ", "  ;
+      std::cout 
+        << (0x01 << 7) << ", " << x 
+        << ", " << (y >= 0 ? y : 0xff + y) << ", " 
+        << len << ", "  ;
 
       // write the covers
       for(unsigned i = 0; i < len; ++i ) {
@@ -123,8 +131,15 @@ public:
 
       // std::cout << "blend_hline       x " << x << " y " << y << " len " << len << " (r " << int(c.r) << " g " << int(c.g) << " b " << int(c.b) << ")"  << " cover " << int(cover) << std::endl;
 
+
+      x -= 50;
+      y -= 50;
+
       // write the span type and data
-      std::cout << (0x01 << 6) << ", " << x << ", " << y << ", " << len << ", "  << int(cover) << ", " << "\n";
+      std::cout 
+          << (0x01 << 6) << ", " << x 
+          << ", " << (y >= 0 ? y : (0xff + y)) << ", " 
+          << len << ", "  << int(cover) << ", " << "\n";
     }
 
 };
@@ -187,11 +202,15 @@ int main(int argc, char **argv)
 
         std::cout << "#include <stdint.h> // uint8_t" << std::endl;
 
-        // so we want to iterate all glyps??
-
+        // all want to iterate all glyps??
         // rather than loop the text we should loop the glpys. but should get this working first
-        for(unsigned code = 0; code < glyph_codes.size(); ++code)
+
+        const char *select = "1234567890 .+-MkmupfVAW";
+
+        // for(unsigned code = 0; code < glyph_codes.size(); ++code)
+        for(const char *p = select; *p; ++p)
         {
+            unsigned code = *p;
             const agg::glyph_cache* glyph = m_fman.glyph( code );
 
             if(glyph /*&& isalpha( code ) */ )
@@ -209,6 +228,8 @@ int main(int argc, char **argv)
                   rb_t    rb(pixf);
 
                   // will need to be uint16_t... if larger than 255.
+                  // handlling signedness is a real problem.
+                  // and so is invertedness.
                   std::cout << "// '" << (code == 10 || code == 13 || code == 92 ? 'x' : char(code)) << std::endl;
                   std::cout << "static uint8_t glyph_" << code << "[] = { ";
                   std::cout << std::endl ;
@@ -220,7 +241,7 @@ int main(int argc, char **argv)
                   // https://coconut2015.github.io/agg-tutorial/agg__trans__affine_8h_source.html
                   agg::trans_affine mtx;
                   mtx *= agg::trans_affine_translation(50 , 50);   // this moves from above origin, back into the screen.
-                  mtx *= agg::trans_affine_scaling(2.0);          // now scale it
+                  mtx *= agg::trans_affine_scaling(1.8);          // largest text.
 
 
                   agg::conv_transform<font_path_type > trans(m_path, mtx);
