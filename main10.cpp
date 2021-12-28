@@ -52,7 +52,8 @@ using namespace agg;
 
 class pixfmt_alpha_blend_rgb_packed
 {
-  // eg. from agg_pixfmt_rgb_packed.h
+  // TODO change name pixfmt my_pixfmt pixfmt_span_generator etc.
+  // eg. adapted from agg_pixfmt_rgb_packed.h
 public:
 
     // used by renderer_base
@@ -116,8 +117,8 @@ public:
       // just use a flat static array strucutre
       // instead of all the addition handle in the called func
 
-      x -= 50;
-      y -= 50;
+//      x -= 50;
+ //     y -= 50;
 
       // write the span type and span data
       std::cout 
@@ -142,8 +143,8 @@ public:
 
       // std::cout << "blend_hline       x " << x << " y " << y << " len " << len << " (r " << int(c.r) << " g " << int(c.g) << " b " << int(c.b) << ")"  << " cover " << int(cover) << std::endl;
 
-      x -= 50;
-      y -= 50;
+  //    x -= 50;
+   //   y -= 50;
 
       // write the span type and data
       std::cout 
@@ -164,9 +165,13 @@ public:
 template<class PixelFormat> class renderer_base
 {
 /*
+  change name renderer_base_no_clip
   renderer_base without a clipbox.
-  allows negative coordinates to be easily represented
+
+  no clip - supports negative coordinates needed for font  spans.
+          - also should be faster, if we know drawing will not extend past bounds. 
 */
+  // adapted from agg_renderer_base.h
 public:
     typedef PixelFormat pixfmt_type;
     typedef typename pixfmt_type::color_type color_type;
@@ -179,17 +184,38 @@ public:
 
   ////////
 
-  pixfmt_type* m_ren;
+    pixfmt_type* m_ren;
 
 
+    void blend_solid_hspan(int x, int y, int len, 
+                           const color_type& c, 
+                           const cover_type* covers)
+    {
+      // no clip 
+      m_ren->blend_solid_hspan(x, y, len, c, covers);
+    }
+
+
+    void blend_hline(int x1, int y, int x2, 
+                     const color_type& c, cover_type cover)
+    {
+      // no clip
+      m_ren->blend_hline(x1, y, x2 - x1 + 1, c, cover);
+    }
 };
+
+
+
+
+
+
 
 
 // packed rgb565
 typedef ::pixfmt_alpha_blend_rgb_packed pixfmt_t;
 
-typedef agg::renderer_base<pixfmt_t>   rb_t ;
-// typedef ::renderer_base<pixfmt_t>   rb_t ;
+// typedef agg::renderer_base<pixfmt_t>   rb_t ;
+typedef ::renderer_base<pixfmt_t>   rb_t ;
 
 
 
@@ -291,7 +317,7 @@ int main(int argc, char **argv)
 
                   // https://coconut2015.github.io/agg-tutorial/agg__trans__affine_8h_source.html
                   agg::trans_affine mtx;
-                  mtx *= agg::trans_affine_translation(50 , 50);   // this moves from above origin, back into the screen.
+//                  mtx *= agg::trans_affine_translation(50 , 50);   // this moves from above origin, back into the screen.
                   mtx *= agg::trans_affine_scaling(1.8);          // largest text.
 
 
