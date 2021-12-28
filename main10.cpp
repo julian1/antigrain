@@ -107,8 +107,8 @@ public:
       // just use a flat static array strucutre
       // instead of all the addition handle in the called func
 
-      x -= 50;
-      y -= 50;
+//      x -= 50;
+//       y -= 50;
 
       // write the span type and span data
       std::cout 
@@ -132,8 +132,8 @@ public:
       // std::cout << "blend_hline       x " << x << " y " << y << " len " << len << " (r " << int(c.r) << " g " << int(c.g) << " b " << int(c.b) << ")"  << " cover " << int(cover) << std::endl;
 
 
-      x -= 50;
-      y -= 50;
+  //    x -= 50;
+   //   y -= 50;
 
       // write the span type and data
       std::cout 
@@ -264,6 +264,10 @@ int main(int argc, char **argv)
                   // std::cout << "good" << std::endl;
                   // for debugging
                   //  write_glyph_structure ( m_path );
+
+                  // sentinel
+                  std::cout << (0x01 << 5) << "\n" ;
+
 
                   std::cout << "};" << "\n" ;
 
