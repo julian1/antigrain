@@ -33,6 +33,12 @@
 #include "agg_pixfmt_rgb_packed.h"  // rgb565
 
 
+/*
+  IMPORTANT.
+    an advantage of this simple path structure - is that it can be generated at runtime or compile time.
+    would just use a contiguous uint8_t  container. and pass the pointer.
+    drawing routines stay the same.
+*/
 
 using namespace agg;
 
