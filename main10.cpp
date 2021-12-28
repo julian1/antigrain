@@ -156,7 +156,7 @@ public:
 
 
 
-template<class PixelFormat> class renderer_base
+template<class PixelFormat> class renderer_base_no_clip
 {
 /*
   change name renderer_base_no_clip
@@ -172,7 +172,7 @@ public:
     typedef typename pixfmt_type::row_data row_data;
 
 
-    explicit renderer_base(pixfmt_type& ren) :
+    explicit renderer_base_no_clip(pixfmt_type& ren) :
         m_ren(&ren)
     {}
 
@@ -204,12 +204,9 @@ public:
 
 
 
-
-// packed rgb565
 typedef pixfmt_span_generator pixfmt_t;
 
-// typedef agg::renderer_base<pixfmt_t>   rb_t ;
-typedef ::renderer_base<pixfmt_t>   rb_t ;
+typedef renderer_base_no_clip<pixfmt_t>   rb_t ;
 
 
 
