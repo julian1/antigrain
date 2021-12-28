@@ -50,7 +50,7 @@ using namespace agg;
 
 
 
-class pixfmt_alpha_blend_rgb_packed
+class pixfmt_span_generator
 {
   // TODO change name pixfmt my_pixfmt pixfmt_span_generator etc.
   // eg. adapted from agg_pixfmt_rgb_packed.h
@@ -65,7 +65,7 @@ private:
     int scroll_start;
 public:
 
-    explicit pixfmt_alpha_blend_rgb_packed( int scroll_start_ )
+    explicit pixfmt_span_generator( int scroll_start_ )
       : scroll_start( scroll_start_ )
     {}
 
@@ -117,9 +117,6 @@ public:
       // just use a flat static array strucutre
       // instead of all the addition handle in the called func
 
-//      x -= 50;
- //     y -= 50;
-
       // write the span type and span data
       std::cout 
         << (0x01 << 7) 
@@ -142,9 +139,6 @@ public:
     {
 
       // std::cout << "blend_hline       x " << x << " y " << y << " len " << len << " (r " << int(c.r) << " g " << int(c.g) << " b " << int(c.b) << ")"  << " cover " << int(cover) << std::endl;
-
-  //    x -= 50;
-   //   y -= 50;
 
       // write the span type and data
       std::cout 
@@ -212,7 +206,7 @@ public:
 
 
 // packed rgb565
-typedef ::pixfmt_alpha_blend_rgb_packed pixfmt_t;
+typedef pixfmt_span_generator pixfmt_t;
 
 // typedef agg::renderer_base<pixfmt_t>   rb_t ;
 typedef ::renderer_base<pixfmt_t>   rb_t ;
