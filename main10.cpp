@@ -43,6 +43,7 @@
     - get rid of the template arguments .
     - implement struct storage - to be able to pass around the fontface with one pointer.
     - get rid of the clipbox .
+    - get rid of the mtx transform - and just use the height/width of the font vertex. - better for hinting etc.
 */
 
 using namespace agg;
@@ -314,8 +315,15 @@ int main(int argc, char **argv)
         }
 
 
+      
+
+        std::cout << "#include \"font_spans.h\"" << "\n\n" ;
+        
+        std::cout << "FontSpans f = {" << std::endl;
+
       // change name. glyph_face
-        std::cout << "uint8_t *glyph[" << glyph_codes.size() << "] = {" << std::endl;
+        // std::cout << "uint8_t *glyph[" << glyph_codes.size() << "] = {" << std::endl;
+        std::cout << "{" << std::endl;
         for(unsigned i = 0; i < glyph_codes.size(); ++i)
         {
           if(glyph_codes[i])
@@ -326,12 +334,13 @@ int main(int argc, char **argv)
           if(i < glyph_codes.size() - 1)
             std::cout << ", " ;
         }
-        std::cout << "};" << std::endl << std::endl;
+        std::cout << "}," << "\n\n";
 
 
 
         // glyph advance x
-        std::cout << "int glyph_advance_x[" << glyph_codes.size() << "] = {" << std::endl;
+        // std::cout << "int glyph_advance_x[" << glyph_codes.size() << "] = {" << std::endl;
+        std::cout << "{" << std::endl;
         for(unsigned i = 0; i < glyph_codes.size(); ++i)
         {
           std::cout << int( glyph_advance_x[i] * 1.8);
@@ -339,12 +348,13 @@ int main(int argc, char **argv)
           if(i < glyph_codes.size() - 1)
                 std::cout << ", " ;
         }
-        std::cout << "};" << std::endl << std::endl;
+        std::cout << "}," << "\n\n";
 
 
         // glyph advance x
         // shouldn't be needed....
-        std::cout << "int glyph_advance_y[" << glyph_codes.size() << "] = {" << std::endl;
+        // std::cout << "int glyph_advance_y[" << glyph_codes.size() << "] = {" << std::endl;
+        std::cout << "{" << std::endl;
         for(unsigned i = 0; i < glyph_codes.size(); ++i)
         {
           std::cout << int(glyph_advance_y[i] * 1.8 );
@@ -352,9 +362,10 @@ int main(int argc, char **argv)
           if(i < glyph_codes.size() - 1)
                 std::cout << ", " ;
         }
-        std::cout << "};" << std::endl << std::endl;
+        std::cout << "}" << "\n\n";
 
 
+        std::cout << "};" << std::endl;
 
     }
     else
