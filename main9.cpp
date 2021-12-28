@@ -8,7 +8,7 @@
     feh agg_test.ppm
 
 
-    ./a.out > ~/devel/stm32/stm32f4/projects/control-panel-2/src/arial.cpp
+    ./a.out > ~/devel/stm32/stm32f4/projects/control-panel-2/src/arial-outline.cpp
 
 */
 
@@ -285,20 +285,14 @@ int main(int argc, char **argv)
     }
 
 
-/*
-    actually we want a much better structure.
-    because we want to be able to work with arbitrary
 
-    we just put it in a structure.
-*/
-    // this isnt enough we want the advance also.
-    // ahhh this is a bit messy
-    // and wasteful of memory. but it will do.
+    std::cout << "#include \"fonts.h\"" << "\n\n" ;
+        
+    std::cout << "FontOutline f = {" << std::endl;
 
 
-    // glyph structure
-  // change name. glyph_face
-    std::cout << "path_type *glyph[" << glyph_codes.size() << "] = {" << std::endl;
+    // std::cout << "path_type *glyph[" << glyph_codes.size() << "] = {" << std::endl;
+    std::cout << "{" << std::endl;
     for(unsigned i = 0; i < glyph_codes.size(); ++i)
     {
       if(glyph_codes[i])
@@ -309,12 +303,13 @@ int main(int argc, char **argv)
       if(i < glyph_codes.size() - 1)
         std::cout << ", " ;
     }
-    std::cout << "};" << std::endl << std::endl;
+    std::cout << "}," << "\n\n";
 
 
 
     // glyph advance x
-    std::cout << "int glyph_advance_x[" << glyph_codes.size() << "] = {" << std::endl;
+    // std::cout << "int glyph_advance_x[" << glyph_codes.size() << "] = {" << std::endl;
+    std::cout << "{" << std::endl;
     for(unsigned i = 0; i < glyph_codes.size(); ++i)
     {
       std::cout << glyph_advance_x[i] ;
@@ -322,12 +317,12 @@ int main(int argc, char **argv)
       if(i < glyph_codes.size() - 1)
             std::cout << ", " ;
     }
-    std::cout << "};" << std::endl << std::endl;
+    std::cout << "}," << "\n\n" ;
 
 
     // glyph advance x
     // shouldn't be needed....
-    std::cout << "int glyph_advance_y[" << glyph_codes.size() << "] = {" << std::endl;
+    std::cout << "{" << std::endl;
     for(unsigned i = 0; i < glyph_codes.size(); ++i)
     {
       std::cout << glyph_advance_y[i] ;
@@ -335,8 +330,9 @@ int main(int argc, char **argv)
       if(i < glyph_codes.size() - 1)
             std::cout << ", " ;
     }
-    std::cout << "};" << std::endl << std::endl;
+    std::cout << "}" << "\n"; 
 
+    std::cout << "};" << "\n\n";
 
 
 

@@ -317,7 +317,7 @@ int main(int argc, char **argv)
 
       
 
-        std::cout << "#include \"font_spans.h\"" << "\n\n" ;
+        std::cout << "#include \"fonts.h\"" << "\n\n" ;
         
         std::cout << "FontSpans f = {" << std::endl;
 
