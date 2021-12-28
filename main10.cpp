@@ -89,6 +89,12 @@ public:
     }
 
 
+    static int squash8u( int x )
+    {
+      // squash into an int8_t  type.   
+      // should do bounds checking here
+      return (x >= 0 ? x : 0xff + x);
+    } 
 
     void blend_solid_hspan(int x, int y,
                            unsigned len,
@@ -107,14 +113,16 @@ public:
       // just use a flat static array strucutre
       // instead of all the addition handle in the called func
 
-//      x -= 50;
-//       y -= 50;
+      x -= 50;
+      y -= 50;
 
       // write the span type and span data
       std::cout 
-        << (0x01 << 7) << ", " << x 
-        << ", " << (y >= 0 ? y : 0xff + y) << ", " 
-        << len << ", "  ;
+        << (0x01 << 7) 
+        << ", " << squash8u(x) 
+        << ", " << squash8u(y)  
+        << ", " << len 
+        << ", "  ;
 
       // write the covers
       for(unsigned i = 0; i < len; ++i ) {
@@ -131,15 +139,17 @@ public:
 
       // std::cout << "blend_hline       x " << x << " y " << y << " len " << len << " (r " << int(c.r) << " g " << int(c.g) << " b " << int(c.b) << ")"  << " cover " << int(cover) << std::endl;
 
-
-  //    x -= 50;
-   //   y -= 50;
+      x -= 50;
+      y -= 50;
 
       // write the span type and data
       std::cout 
-          << (0x01 << 6) << ", " << x 
-          << ", " << (y >= 0 ? y : (0xff + y)) << ", " 
-          << len << ", "  << int(cover) << ", " << "\n";
+          << (0x01 << 6) 
+          << ", " << squash8u( x )
+          << ", " << squash8u( y)  
+          << ", " << len 
+          << ", "  << int(cover) 
+          << ", " << "\n";
     }
 
 };
@@ -230,7 +240,7 @@ int main(int argc, char **argv)
                   // will need to be uint16_t... if larger than 255.
                   // handlling signedness is a real problem.
                   // and so is invertedness.
-                  std::cout << "// '" << (code == 10 || code == 13 || code == 92 ? 'x' : char(code)) << "'" std::endl;
+                  std::cout << "// '" << (code == 10 || code == 13 || code == 92 ? 'x' : char(code)) << "'" << std::endl;
                   std::cout << "static uint8_t glyph_" << code << "[] = { ";
                   std::cout << std::endl ;
 
