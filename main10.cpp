@@ -91,9 +91,14 @@ public:
 
     static int squash8u( int x )
     {
-      // squash into an int8_t  type.   
+      // squash value into an int8_t  type.   
       // should do bounds checking here
-      return (x >= 0 ? x : 0xff + x);
+
+      // negative of twos compment
+
+      return (uint8_t ) (int8_t) x; 
+
+      // return (x >= 0 ? x : 0xff - x);
     } 
 
     void blend_solid_hspan(int x, int y,
