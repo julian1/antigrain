@@ -48,17 +48,26 @@
 
 using namespace agg;
 
-//===========================================pixfmt_alpha_blend_rgb_packed
-template<class Blender,  class RenBuf> class pixfmt_alpha_blend_rgb_packed
+
+
+class pixfmt_alpha_blend_rgb_packed
 {
   // eg. from agg_pixfmt_rgb_packed.h
 public:
 
     // for consumers
-    typedef RenBuf   rbuf_type;
-    typedef typename rbuf_type::row_data row_data;
-    typedef Blender  blender_type;
-    typedef typename blender_type::color_type color_type;
+    // typedef RenBuf   rbuf_type;
+    // typedef typename rbuf_type::row_data row_data;
+
+
+        typedef const_row_info<int8u> row_data;
+
+
+    //typedef typename agg::blender_rgb565::row_data row_data;
+
+
+    // typedef Blender  blender_type;
+    typedef typename agg::blender_rgb565::color_type color_type;
 /*
     typedef typename blender_type::pixel_type pixel_type;
     typedef int                               order_type; // A fake one
@@ -173,7 +182,7 @@ public:
 
 
 // packed rgb565
-typedef ::pixfmt_alpha_blend_rgb_packed<agg::blender_rgb565, agg::rendering_buffer> pixfmt_t;
+typedef ::pixfmt_alpha_blend_rgb_packed pixfmt_t;
 
 typedef agg::renderer_base<pixfmt_t>   rb_t ;
 
