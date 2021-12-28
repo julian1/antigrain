@@ -38,6 +38,11 @@
     an advantage of this simple path structure - is that it can be generated at runtime or compile time.
     would just use a contiguous uint8_t  container. and pass the pointer.
     drawing routines stay the same.
+  ---
+  TODO 
+    - get rid of the template arguments .
+    - implement struct storage - to be able to pass around the fontface with one pointer.
+    - get rid of the clipbox .
 */
 
 using namespace agg;
