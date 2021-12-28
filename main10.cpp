@@ -173,7 +173,13 @@ public:
     typedef typename pixfmt_type::row_data row_data;
 
 
+    explicit renderer_base(pixfmt_type& ren) :
+        m_ren(&ren)
+    {}
 
+  ////////
+
+  pixfmt_type* m_ren;
 
 
 };
