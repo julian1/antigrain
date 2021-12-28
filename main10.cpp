@@ -80,9 +80,9 @@ public:
                                const color_type& c)
     {
       assert(0);
-    /*
-      // std::cout << "copy_hline       x " << x << " y " << y << " len " << len << " (r " << int(c.r) << " g " << int(c.g) << " b " << int(c.b) << ")"  << std::endl;
-    */
+      /*
+        // std::cout << "copy_hline       x " << x << " y " << y << " len " << len << " (r " << int(c.r) << " g " << int(c.g) << " b " << int(c.b) << ")"  << std::endl;
+      */
 
 
     }
@@ -94,7 +94,6 @@ public:
       // should do bounds checking here
 
       // negative of twos compment
-
       return (uint8_t ) (int8_t) x; 
 
       // return (x >= 0 ? x : 0xff - x);
@@ -252,8 +251,9 @@ int main(int argc, char **argv)
     if(m_feng.load_font( font_filename, 0, agg::glyph_ren_outline))
     {
         m_feng.hinting(false);
-        m_feng.height(40);
-        m_feng.width(40);
+
+        m_feng.height(40 * 1.8);
+        m_feng.width(40 * 1.8);
 
         m_feng.flip_y( 1 );
 
@@ -307,13 +307,16 @@ int main(int argc, char **argv)
                   // s_path.m_scale = 1; must be set.
 
                   // https://coconut2015.github.io/agg-tutorial/agg__trans__affine_8h_source.html
-                  agg::trans_affine mtx;
+  //                agg::trans_affine mtx;
 //                  mtx *= agg::trans_affine_translation(50 , 50);   // this moves from above origin, back into the screen.
-                  mtx *= agg::trans_affine_scaling(1.8);          // largest text.
+///                  mtx *= agg::trans_affine_scaling(1.8);          // largest text.
 
 
-                  agg::conv_transform<font_path_type > trans(m_path, mtx);
-                  agg::conv_curve<agg::conv_transform< font_path_type> > curve(trans);
+//                  agg::conv_transform<font_path_type > trans(m_path, mtx);
+ //                 agg::conv_curve<agg::conv_transform< font_path_type> > curve(trans);
+
+                  agg::conv_curve<font_path_type > curve(m_path );
+
 
                   agg::rasterizer_scanline_aa<> ras;
                   agg::scanline_p8 sl;
@@ -374,7 +377,8 @@ int main(int argc, char **argv)
         std::cout << "{" << std::endl;
         for(unsigned i = 0; i < glyph_codes.size(); ++i)
         {
-          std::cout << int( glyph_advance_x[i] * 1.8);
+          // std::cout << int( glyph_advance_x[i] * 1.8);
+          std::cout << int( glyph_advance_x[i] );
 
           if(i < glyph_codes.size() - 1)
                 std::cout << ", " ;
@@ -388,7 +392,8 @@ int main(int argc, char **argv)
         std::cout << "{" << std::endl;
         for(unsigned i = 0; i < glyph_codes.size(); ++i)
         {
-          std::cout << int(glyph_advance_y[i] * 1.8 );
+          // std::cout << int(glyph_advance_y[i] * 1.8 );
+          std::cout << int(glyph_advance_y[i] );
 
           if(i < glyph_codes.size() - 1)
                 std::cout << ", " ;
