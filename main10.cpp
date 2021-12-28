@@ -312,7 +312,7 @@ int main(int argc, char **argv)
         std::cout << "int glyph_advance_x[" << glyph_codes.size() << "] = {" << std::endl;
         for(unsigned i = 0; i < glyph_codes.size(); ++i)
         {
-          std::cout << glyph_advance_x[i] ;
+          std::cout << int( glyph_advance_x[i] * 1.8);
 
           if(i < glyph_codes.size() - 1)
                 std::cout << ", " ;
@@ -325,7 +325,7 @@ int main(int argc, char **argv)
         std::cout << "int glyph_advance_y[" << glyph_codes.size() << "] = {" << std::endl;
         for(unsigned i = 0; i < glyph_codes.size(); ++i)
         {
-          std::cout << glyph_advance_y[i] ;
+          std::cout << int(glyph_advance_y[i] * 1.8 );
 
           if(i < glyph_codes.size() - 1)
                 std::cout << ", " ;
