@@ -230,7 +230,7 @@ int main(int argc, char **argv)
                   // will need to be uint16_t... if larger than 255.
                   // handlling signedness is a real problem.
                   // and so is invertedness.
-                  std::cout << "// '" << (code == 10 || code == 13 || code == 92 ? 'x' : char(code)) << std::endl;
+                  std::cout << "// '" << (code == 10 || code == 13 || code == 92 ? 'x' : char(code)) << "'" std::endl;
                   std::cout << "static uint8_t glyph_" << code << "[] = { ";
                   std::cout << std::endl ;
 
