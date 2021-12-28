@@ -239,6 +239,16 @@ int main(int argc, char **argv)
                 {
                     // seem to be a lot of glyphs with the same data, eg. not proper glyphs.
 
+/*
+    we could avoid the horrible +50, -50 operations. to avoid clipping.
+    - if... we used a renderer_base without a clip box.
+    ----------
+
+    or if allow clipbox with negative values.
+  -------
+    it would be useful to have one without the - clip box. for speed. anyway. 
+*/
+
                   pixfmt_t  pixf(  0 );
                   rb_t    rb(pixf);
 
@@ -272,6 +282,7 @@ int main(int argc, char **argv)
 
                   // write_glyph_c_data( code, m_path);
 
+                  // record glyph information
                   glyph_codes[ code] = 1;
                   glyph_advance_x[code] = glyph->advance_x;
                   glyph_advance_y[code] = glyph->advance_y;
