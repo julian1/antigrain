@@ -335,7 +335,7 @@ int main(int argc, char **argv)
 
         std::cout << "#include \"fonts.h\"" << "\n\n" ;
         
-        std::cout << "FontSpans " <<  font_filename << "_span_" << fontsize << " = {" << std::endl;
+        std::cout << "const FontSpans " <<  font_filename << "_span_" << fontsize << " = {" << std::endl;
 
         // glypa is ok
         std::cout << "{" << std::endl;
