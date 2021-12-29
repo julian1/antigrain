@@ -16,6 +16,7 @@
 
 #include <iostream>
 #include <vector>
+#include <regex>
 
 #include <assert.h>
 
@@ -238,12 +239,15 @@ int main(int argc, char **argv)
 
     assert(glyph_advance_x.size() == 256);
 
-    if(argc != 2) {
-      std::cout << "no font argument!" << std::endl;
+    // how do we decode an integer argument?
+    if(argc != 3) {
+      std::cout << "usage: a.out <fontfile.ttf> <size>" << std::endl;
       exit(1);
     }
     const char *font_filename = argv[1 ];
-
+    int fontsize = std::stoi( argv[2]);
+    // std::string fontname = std::regex_replace(font_filename, std::regex("\\.*"), "");
+    // std::cout << "font name " << fontname << std::endl;
 
     // write_c_header();
 
@@ -252,8 +256,8 @@ int main(int argc, char **argv)
     {
         m_feng.hinting(false);
 
-        m_feng.height( 72 );
-        m_feng.width( 72 );
+        m_feng.height( fontsize );
+        m_feng.width( fontsize );
 
         m_feng.flip_y( 1 );
 
@@ -329,7 +333,7 @@ int main(int argc, char **argv)
 
         std::cout << "#include \"fonts.h\"" << "\n\n" ;
         
-        std::cout << "FontSpans f = {" << std::endl;
+        std::cout << "FontSpans " <<  font_filename << "_span_" << fontsize << " = {" << std::endl;
 
         // glypa is ok
         std::cout << "{" << std::endl;
