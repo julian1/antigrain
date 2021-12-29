@@ -5,6 +5,7 @@
     Usage,
     ./build10.sh
     ./a.out fonts/arial.ttf  18 > out.cpp 
+    ./a.out fonts/arial.ttf  72 > out.cpp 
     edit out.cpp for the structure name
     g++ -c out.cpp  -I ./agg-svn-r138-agg-2.4/include/
     cp out.cpp  ~/devel/stm32/stm32f4/projects/control-panel-2/src/arial-span-18.cpp
@@ -295,7 +296,10 @@ int main(int argc, char **argv)
                   // handlling signedness is a real problem.
                   // and so is invertedness.
                   std::cout << "// '" << (code == 10 || code == 13 || code == 92 ? 'x' : char(code)) << "'" << std::endl;
-                  std::cout << "static uint8_t glyph_" << code << "[] = { ";
+
+                  // static const to force into flash
+                  // see Andy Brown resonponse, https://stackoverflow.com/questions/39849150/what-uses-up-more-space-in-flash-static-variable-or-global-variable
+                  std::cout << "static const uint8_t glyph_" << code << "[] = { ";
                   std::cout << std::endl ;
 
 
