@@ -236,7 +236,7 @@ int main(int argc, char **argv)
 
                     // https://coconut2015.github.io/agg-tutorial/agg__trans__affine_8h_source.html
                     agg::trans_affine mtx;
-                    mtx *= agg::trans_affine_translation(50 , 50);   // this moves from above origin, back into the screen.
+                    mtx *= agg::trans_affine_translation(50 , 50);   // this moves from above origin, back into the screen.. for ppm writing.
                     mtx *= agg::trans_affine_scaling(1.0);          // now scale it
 
 

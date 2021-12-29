@@ -40,10 +40,10 @@
     drawing routines stay the same.
   ---
   TODO 
-    - get rid of the template arguments .
+    - done - get rid of the template arguments .
     - done - implement struct storage - to be able to pass around the fontface with one pointer.
-    - get rid of the clipbox .
-    - get rid of the mtx transform - and just use the height/width of the font vertex. - better for hinting etc.
+    - done - get rid of the clipbox .
+    - done - get rid of the mtx transform - and just use the height/width of the font vertex. - better for hinting etc.
 */
 
 using namespace agg;
