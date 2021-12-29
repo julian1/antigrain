@@ -4,8 +4,10 @@
 
     Usage,
     ./build10.sh
-    ./a.out fonts/arial.ttf  > out.cpp
+    ./a.out fonts/arial.ttf  18 > out.cpp 
+    edit out.cpp for the structure name
     g++ -c out.cpp  -I ./agg-svn-r138-agg-2.4/include/
+    cp out.cpp  ~/devel/stm32/stm32f4/projects/control-panel-2/src/arial-span-18.cpp
 
     scanlines for all glyphys is pretty large.
 
