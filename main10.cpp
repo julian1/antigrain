@@ -1,4 +1,6 @@
 /*
+    span mapped fonts
+
     load and render freetype to span data.
     use type and length to wowk out the covers
 
@@ -270,7 +272,7 @@ int main(int argc, char **argv)
         // all want to iterate all glyps??
         // rather than loop the text we should loop the glpys. but should get this working first
 
-        // const char *select = "1234567890 .+-MkmupfVAW";
+        // const char *select = "1234567890 ,.+-TGMkmupafVAWR";
         // for(const char *p = select; *p; ++p)
         for(unsigned code = 0; code < glyph_codes.size(); ++code)
         {

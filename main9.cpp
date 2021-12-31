@@ -1,6 +1,7 @@
 /*
-    load and render freetype font glyphs to ppm file.
-    and write c++ agg outline vector structure
+
+  load and render freetype font glyphs to ppm file.
+  also write c++ agg outline vector structure
 
     Useage
     ./build9.sh
