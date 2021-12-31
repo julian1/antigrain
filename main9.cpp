@@ -282,6 +282,7 @@ int main(int argc, char **argv)
     else
     {
         std::cout << "could not open font \n" ;
+        exit(123);
     }
 
 

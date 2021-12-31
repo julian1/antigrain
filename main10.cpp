@@ -7,7 +7,7 @@
     ./a.out fonts/arial.ttf  18 > out.cpp 
     ./a.out fonts/arial.ttf  72 > out.cpp 
     edit out.cpp for the structure name
-    g++ -c out.cpp  -I ./agg-svn-r138-agg-2.4/include/
+    G++ -c out.cpp  -I ./agg-svn-r138-agg-2.4/include/
     cp out.cpp  ~/devel/stm32/stm32f4/projects/control-panel-2/src/arial-span-18.cpp
 
     scanlines for all glyphys is pretty large.
@@ -270,12 +270,11 @@ int main(int argc, char **argv)
         // all want to iterate all glyps??
         // rather than loop the text we should loop the glpys. but should get this working first
 
-        const char *select = "1234567890 .+-MkmupfVAW";
-
-        // for(unsigned code = 0; code < glyph_codes.size(); ++code)
-        for(const char *p = select; *p; ++p)
+        // const char *select = "1234567890 .+-MkmupfVAW";
+        // for(const char *p = select; *p; ++p)
+        for(unsigned code = 0; code < glyph_codes.size(); ++code)
         {
-            unsigned code = *p;
+            // unsigned code = *p;
             const agg::glyph_cache* glyph = m_fman.glyph( code );
 
             if(glyph /*&& isalpha( code ) */ )
@@ -387,6 +386,7 @@ int main(int argc, char **argv)
     else
     {
         std::cout << "could not open font \n" ;
+        exit(123);
     }
 
 
